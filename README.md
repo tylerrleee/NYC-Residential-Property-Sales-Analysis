@@ -14,19 +14,19 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
   - 120,000+ sales records  
   - All residential building classes (1-Family through Walk-up Condos)  
   - Spatial centroid join using PLUTO shapefile  
+- Geocoded 100% of Transactions: Merged Department of Finance sales data with the PLUTO shapefile (856,734 features) to compute centroids and attach latitude/longitude to every record, enabling precise spatial mapping of property sales.
 
-Geocoded 100% of Transactions: Merged Department of Finance sales data with the PLUTO shapefile (856,734 features) to compute centroids and attach latitude/longitude to every record, enabling precise spatial mapping of property sales.
 ---
 
 ## Visualizations
 
-![Average Sale Price in each Borough]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/avgsalepriceperborough.pdf))
+![Average Sale Price in each Borough](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/avgsalepriceperborough.pdf)
 
-![Property Sale Density of NYC]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/densitypropertysale.pdf))
+![Property Sale Density of NYC](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/densitypropertysale.pdf)
 
-![Property Sales in NYC]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/propertysales%20innyc.pdf))
+![Property Sales in NYC](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/propertysales%20innyc.pdf)
 
-![Proportions of Building Type purchased]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/proportionsofsales.png))
+![Proportions of Building Type purchased](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/proportionsofsales.png)
 
 
 ## Data Sources
