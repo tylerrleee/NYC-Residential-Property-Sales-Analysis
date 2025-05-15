@@ -18,16 +18,6 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 
 ---
 
-## Visualizations
-
-![Average Sale Price in each Borough](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/avgsalepriceperborough.pdf)
-
-![Property Sale Density of NYC](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/densitypropertysale.pdf)
-
-![Property Sales in NYC](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/propertysales%20innyc.pdf)
-
-![Proportions of Building Type purchased](http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/proportionsofsales.png)
-
 
 ## Data Sources
 
