@@ -4,7 +4,7 @@
 A reproducible R pipeline for ingesting, cleaning, geocoding, and visualizing five-borough rolling-sales data from the NYC Department of Finance (May 2024–Apr 2025), with spatial analysis via the PLUTO shapefile.
 Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,000 rolling‑sales records spanning May 2024–April 2025 across all five NYC boroughs, recoding 30+ variables and handling 25,000+ zero‑price deed transfers to ensure a clean, analysis‑ready dataset.
 
-Geocoded 100% of Transactions: Merged Department of Finance sales data with the PLUTO shapefile (856,734 features) to compute centroids and attach latitude/longitude to every record, enabling precise spatial mapping of property sales.
+
 ---
 
 ## 📋 Table of Contents
@@ -22,7 +22,6 @@ Geocoded 100% of Transactions: Merged Department of Finance sales data with the 
 11. [Contact](#contact)  
 
 ---
-
 ## Project Overview
 
 - **Goal:** Examine how transaction volume, price, and building class distributions vary across NYC’s five boroughs.  
@@ -32,7 +31,16 @@ Geocoded 100% of Transactions: Merged Department of Finance sales data with the 
   - All residential building classes (1-Family through Walk-up Condos)  
   - Spatial centroid join using PLUTO shapefile  
 
+Geocoded 100% of Transactions: Merged Department of Finance sales data with the PLUTO shapefile (856,734 features) to compute centroids and attach latitude/longitude to every record, enabling precise spatial mapping of property sales.
 ---
+
+## Visualizations
+
+![Average Sale Price in each Borough]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/avgsalepriceperborough.pdf))
+![Property Sale Density of NYC]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/densitypropertysale.pdf))
+![Property Sales in NYC]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/propertysales%20innyc.pdf))
+![Proportions of Building Type purchased]([http://url/to/img.png](https://github.com/tylerrleee/NYCsales/blob/LAB5/visualizations/proportionsofsales.png))
+
 
 ## Data Sources
 
@@ -54,9 +62,3 @@ All raw data and intermediate files live in the `data/` folder.
 
 ---
 
-## 🔧 Installation & Setup
-
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/<your-username>/nyc-property-sales.git
-   cd nyc-property-sales
