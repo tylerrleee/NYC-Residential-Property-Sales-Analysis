@@ -47,6 +47,8 @@ bibliography: references.bib
 Reads in the five borough rolling‑sales CSVs and the annual CPI file into R. Rolling sales were obtained from the [New York City Department of Finance Rolling Sales Data](https://www.nyc.gov/site/finance/property/property-rolling-sales-data.page).
 
 ```{r LOAD DATA, echo=FALSE}
+setwd("/Users/tienle/Downloads/nycdata")
+
 library(dplyr)
 library(stringr)
 library(tidyr)
@@ -55,21 +57,27 @@ library(bookdown)
 library(sf)
 library(lubridate)
 library(cartogram)
+library(hrbrthemes)
+library(viridis)
+```
 
+```{r}
+#|echo: false
+#|include: false
 # Source: https://www.nyc.gov/site/finance/property/property-rolling-sales-data.page
 
-manhattan <- read.csv("/Users/tienle/Downloads/nycdata/rollingsales_manhattan.csv") 
+manhattan <- read.csv("rollingsales_manhattan.csv") 
 #head(manhattan)
-queens <- read.csv("/Users/tienle/Downloads/nycdata/rollingsales_queens.csv") 
+queens <- read.csv("rollingsales_queens.csv") 
 # head(queens) 4
-bronx <- read.csv("/Users/tienle/Downloads/nycdata/rollingsales_bronx.csv") 
+bronx <- read.csv("rollingsales_bronx.csv") 
 # head(bronx) 2
-brooklyn <- read.csv("/Users/tienle/Downloads/nycdata/rollingsales_brooklyn.csv") 
+brooklyn <- read.csv("rollingsales_brooklyn.csv") 
 # head(brooklyn) 3
-statenisland <- read.csv("/Users/tienle/Downloads/nycdata/rollingsales_statenisland.csv") 
+statenisland <- read.csv("rollingsales_statenisland.csv") 
 # head(statenisland) 5
-cpi <- read.csv("/Users/tienle/Downloads/nycdata/cpiannual.csv")
-pluto <- st_read("/Users/tienle/Downloads/nycdata/nyc_mappluto_25v1_1_shp/MapPLUTO.shp") 
+#cpi <- read.csv("/Users/tienle/Downloads/nycdata/cpiannual.csv")
+pluto <- st_read("MapPLUTO.shp") 
 
 ```
 
@@ -127,7 +135,7 @@ all_sales <- all_sales %>% rename(
     borough = if_else(borough == 5, "Staten Island", as.character(borough)),
     
   )
-all_sales <- select(all_sales, -apt_numb, -tax_class_atsale, -building_class_atsale, -BUILDING.CLASS.AT.PRESENT, -easement, -commercial_unit, -year_built,-residential_unit,-total_units,)
+all_sales <- select(all_sales, -apt_numb, -tax_class_atsale, -building_class_atsale, -BUILDING.CLASS.AT.PRESENT, -easement, -commercial_unit, -year_built, residential_unit,-total_units,)
 ```
 
 Standardizing our data, making it more readable, and dropping noisy columns. 
@@ -206,8 +214,11 @@ Indicates a property transfer occurred without a monetary transaction (e.g., gif
 
 ## 4.2 Geocoding & Spatial Join
 
-```{r DATA CLEANING}
-# Standardize building class
+```{r DATA CLEANING }
+
+#|echo: false
+#|include: false
+## Standardize building class
 # Building Classification Glossary: https://www.nyc.gov/assets/finance/jump/hlpbldgcode.html
 all_sales <- all_sales %>%
   mutate(building_class = recode(building_class,
@@ -462,7 +473,7 @@ head(residential_borough_counts)
 
 # special icons for viz
 # 100 squares per waffle, so we'll scale to hundreds
-ggplot(residential_borough_counts, 
+waffle_byresidential <- ggplot(residential_borough_counts, 
        aes(values = waffle_prop, fill = building_class)) +
   geom_waffle(
     n_rows = 5,
@@ -501,7 +512,7 @@ heat_avg <- all_sales %>%
 head(heat_avg)
   #filter(!is.na(sale_price), sale_price > 0)
 
-ggplot(heat_avg, aes(x = month_year, y = borough, fill = avg_price)) +
+heat_map_price <- ggplot(heat_avg, aes(x = month_year, y = borough, fill = avg_price)) +
   geom_tile(color = "white", size = 0.1) +
   scale_fill_viridis(name = "Avg Sale Price (in $Million)", option = "C") +
   # borough on y is categorical, so use scale_y_discrete()
@@ -553,14 +564,12 @@ borough_pins <- tibble(
   lon       = c(-73.97,      -73.90,      -73.94,       -73.80,        -74.15),
   lat       = c( 40.78,       40.85,       40.65,        40.72,         40.58 )
 )
-
-
 ```
 
 ## 5.3 Property Sales Bubble Map
 
-```{r Plotting Bubble}
-  ggplot() +
+```{r Property Sales in NYC}
+  property_sales <- ggplot() +
   # a) USA basemap
   geom_sf(data = usa_map, fill= "grey", alpha = 0.3) +
   # b) Points for each sale
@@ -615,17 +624,14 @@ borough_pins <- tibble(
 
   ) + 
   labs(
-    title ="Property Sales in NYC 2024-2025" 
+    title ="Property Sales in NYC" 
   )
-
-  
 ```
 ## 5.4 Property Sales Density Map
 
-```{r }
+```{r Property Sale Density in NYC}
 library(RColorBrewer)
-head(map_points)
-  ggplot() +
+property_density <-  ggplot() +
   #Base map of USA
   geom_sf(data = usa_map, fill="grey88", color = NA)+
   # 2D density heat
@@ -662,7 +668,171 @@ head(map_points)
     legend.text = element_text(size = 15),
     legend.key        = element_blank() 
   ) +
-    labs(title = "Property Sale Density in NYC (2024–2025)")
+    labs(title = "Property Sale Density in NYC")
+```
+
+```{r Property Sales in each Borough}
+
+# Clean the sale_price column if not done already
+sales_geo <- sales_geo %>%
+  mutate(sale_price = as.numeric(gsub(",", "", sale_price)))
+
+# Define a function to create plots by borough
+plot_borough_avg_price <- function(borough_name) {
+  borough_data <- sales_geo %>%
+    filter(borough == borough_name) %>%
+    group_by(neighborhood) %>%
+    summarize(avg_price = mean(sale_price, na.rm = TRUE)) %>%
+    mutate(avg_price = avg_price / 1e5)
+
+property_sale_borough <- ggplot(data = borough_data, aes(x = avg_price, y = reorder(neighborhood, avg_price), fill = neighborhood)) +
+    geom_bar(stat = "identity") +
+    labs(
+      x = "Average Sale Price (in Thousands)",
+      y = "Neighborhood",
+      title = paste("Property Sales in", borough_name)
+    ) +
+    theme_minimal() +
+    theme(legend.position = "none")
+}
+
+# Generate plots for each borough
+plot_borough_avg_price("Manhattan")
+plot_borough_avg_price("Queens")
+plot_borough_avg_price("Brooklyn")
+plot_borough_avg_price("Bronx")
+plot_borough_avg_price("Staten Island")
+```
+```{r Price per Square Foot by Building Type}
+# Normalize pricing across property sizes.
+sales_geo <- sales_geo %>%
+  mutate(price_per_sqft = sale_price / as.numeric(gross_sqft)) %>%
+  filter(price_per_sqft < 5000)  # outlier trimming
+
+sqr_ft_price <- ggplot(sales_geo, aes(x = building_class, y = price_per_sqft)) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(title = "Price per Square Foot by Building Type", x = "", y = "Price/Sqft ($)")
+```
+
+```{r Monthly Transaction Volume by Borough}
+# Track market activity across months and boroughs.
+sales_time <- all_sales %>%
+  filter(sale_price > 0) %>%
+  mutate(month = floor_date(date_operand, "month")) %>%
+  group_by(month, borough) %>%
+  summarise(sales = n())
+
+volume_borough <- ggplot(sales_time, aes(x = month, y = sales, color = borough)) +
+  geom_line(size = 1.1) +
+  labs(title = "Monthly Transaction Volume by Borough", y = "Transactions", x = "Month")
+```
+
+
+```{r Dashboard}
+library(shiny)
+
+
+ui <- fluidPage(
+  titlePanel("NYC Property Sales Dashboard (2024-2025)"),
+  sidebarLayout(
+    sidebarPanel(
+      class = "sidebar",
+      width = 2,
+      tabsetPanel(
+        tabPanel("📊 Transaction Volume", value = "volume"),
+        tabPanel("💲 Price/Sqft by Building Type", value = "price_sqft"),
+        tabPanel("🗺️ Sales Bubble Map", value = "bubble_map"),
+        tabPanel("🌡️ Sale Density Map", value = "density_map"),
+        tabPanel("🔥 Price Heatmap", value = "heatmap"),
+        tabPanel("🏘️ Residential Composition", value = "waffle"),
+        tabPanel("📍 Neighborhood Avg Prices", 
+                 value = "borough_avg",
+                 selectInput("borough", "Select a Borough:",
+                             choices = unique(sales_geo$borough),
+                             selected = "Manhattan")
+        ),
+        id = "tabs"
+      )
+    ),
+    mainPanel(
+      uiOutput("plot_ui")
+    )
+  )
+)
+
+server <- function(input, output) {
+
+  output$plot_ui <- renderUI({
+      switch(input$tabs,
+             "volume" = plotOutput("volume_plot"),
+             "price_sqft" = plotOutput("price_sqft_plot"),
+             "bubble_map" = plotOutput("bubble_map"),
+             "density_map" = plotOutput("density_map"),
+             "heatmap" = plotOutput("heatmap"),
+             "waffle" = plotOutput("waffle_plot"),
+             "borough_avg" = plotOutput("borough_bar")
+      )
+    })  
+  # Transaction Volume
+  output$volume_plot <- renderPlot({
+    volume_borough
+    
+  })
+
+  # Price per Sqft Boxplot
+  output$price_sqft_plot <- renderPlot({
+    sqr_ft_price
+  })
+
+  # Bubble Map
+  output$bubble_map <- renderPlot({
+    property_sales
+  })
+
+  # Density Map
+  output$density_map <- renderPlot({
+    property_density
+  })
+
+  # Heatmap of Avg Prices
+  output$heatmap <- renderPlot({
+    heat_map_price
+  })
+
+  # Waffle Chart
+  output$waffle_plot <- renderPlot({
+    waffle_byresidential
+  })
+
+  # Borough-specific Neighborhood Avg Bar Chart
+  output$borough_bar <- renderPlot({
+    borough_data <- sales_geo %>%
+      filter(borough == input$borough) %>%
+      group_by(neighborhood) %>%
+      summarize(avg_price = mean(sale_price, na.rm = TRUE)) %>%
+      mutate(avg_price = avg_price / 1e5)
+
+    ggplot(borough_data, aes(x = avg_price, y = reorder(neighborhood, avg_price), fill = neighborhood)) +
+      geom_bar(stat = "identity") +
+      labs(x = "Avg Sale Price (in Thousands)",
+           y = "Neighborhood",
+           title = paste("Property Sales in", input$borough)) +
+      theme_minimal() +
+      theme(legend.position = "none")
+  })
+
+}
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+```{r, include=FALSE}
+rsconnect::setAccountInfo(name='tylerrle', token='E311FA08D078AF1DCCE5D0ECA1FA2737', secret='TQRMGnFytglm0ZRVdBfFMoSEbhUzTLpPYAnva0Qq')
+library(rsconnect)
+rsconnect::deployApp(appDir = "NYCproperty.Rmd")
 ```
 
 # References
