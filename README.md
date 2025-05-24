@@ -21,7 +21,7 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 ## Data Sources
 
 1. [NYC Annulized Property Sales](<https://www.nyc.gov/site/finance/property/property-annualized-sales-update.page>)
-2. [PLUTO Shapefile** (NYC Planning)  ](<https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks/about_data>)
+2. [PLUTO Shapefile (NYC Planning)  ](<https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks/about_data>)
 3. [U.S. Consumer Price Index](<https://www.bls.gov/cpi/>)
 
 ---
