@@ -5,7 +5,6 @@ A reproducible R pipeline for ingesting, cleaning, geocoding, and visualizing fi
 Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,000 rolling‑sales records spanning May 2024–April 2025 across all five NYC boroughs, recoding 30+ variables and handling 25,000+ zero‑price deed transfers to ensure a clean, analysis‑ready dataset.
 
 
-
 ## Project Overview
 
 - **Goal:** Examine how transaction volume, price, and building class distributions vary across NYC’s five boroughs.  
@@ -21,11 +20,9 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 
 ## Data Sources
 
-1. **NYC Rolling Sales** (Dept. of Finance CSVs)  
+1. [NYC Annulized Property Sales](<https://www.nyc.gov/site/finance/property/property-annualized-sales-update.page>)
 2. **PLUTO Shapefile** (NYC Planning)  
 3. **Derived Summaries** (average price per borough, density maps, etc.)  
-
-All raw data and intermediate files live in the `data/` folder.
 
 ---
 
