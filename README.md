@@ -16,7 +16,19 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 - Geocoded 100% of Transactions: Merged Department of Finance sales data with the PLUTO shapefile (856,734 features) to compute centroids and attach latitude/longitude to every record, enabling precise spatial mapping of property sales.
 
 ---
+## Data Visualization
 
+<p align="center">
+  <a href="propertysales_innyc.pdf" class="image fit">
+    <img src="propertysales_innyc.png" alt="Property Sale Density by Sale Price in NYC (2024–2025)" />
+  </a>
+</p>
+
+[![Proportion of Residential Building in NYC (2024–2025)](images/proportionsofsales.png)](proportionsofsales.pdf)
+
+[![Average Sales Price per Borough (2024–2025)](images/avgsalepriceperborough.png)](avgsalepriceperborough.pdf)
+
+[![Property Sale Density in NYC (2024–2025)](images/densitypropertysale.png)](densitypropertysale.pdf)
 
 ## Data Sources
 
