@@ -15,7 +15,6 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
   - Spatial centroid join using PLUTO shapefile  
 - Geocoded 100% of Transactions: Merged Department of Finance sales data with the PLUTO shapefile (856,734 features) to compute centroids and attach latitude/longitude to every record, enabling precise spatial mapping of property sales.
 
----
 ## Data Visualization
 
 <p align="center">
