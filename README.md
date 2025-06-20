@@ -19,8 +19,9 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 ## Data Visualization
 
 <p align="center">
-  <a href="propertysales_innyc.png" class="image fit">
-    <img src="/propertysales_innyc.png" alt="Property Sale Density by Sale Price in NYC (2024–2025)" />
+  <a href="propertysales_innyc.pdf" class="image fit">
+    <img src="images/propertysales_innyc.png" 
+         alt="Property Sale Density by Sale Price in NYC (2024–2025)" />
   </a>
 </p>
 
@@ -42,8 +43,7 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 
 - **ETL pipeline in R** using `dplyr`, `sf`, `lubridate`, `stringr`  
 - **Automated geocoding**: centroids of 856,734 PLUTO polygons → lat/long  
-- **Reproducible plots** with `ggplot2` + `patchwork`  
-- **Interactive map** export via `leaflet` (optional)  
+- **Reproducible plots** with `ggplot2` + `patchwork`   
 - **Report generation** in R Markdown  
 
 ---
