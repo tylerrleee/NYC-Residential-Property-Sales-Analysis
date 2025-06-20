@@ -19,16 +19,16 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 ## Data Visualization
 
 <p align="center">
-  <a href="propertysales_innyc.pdf" class="image fit">
-    <img src="propertysales_innyc.png" alt="Property Sale Density by Sale Price in NYC (2024–2025)" />
+  <a href="propertysales_innyc.png" class="image fit">
+    <img src="/propertysales_innyc.png" alt="Property Sale Density by Sale Price in NYC (2024–2025)" />
   </a>
 </p>
 
-[![Proportion of Residential Building in NYC (2024–2025)](images/proportionsofsales.png)](proportionsofsales.pdf)
+[[Proportion of Residential Building in NYC (2024–2025)](images/proportionsofsales.png)](proportionsofsales.pdf)
 
-[![Average Sales Price per Borough (2024–2025)](images/avgsalepriceperborough.png)](avgsalepriceperborough.pdf)
+[[Average Sales Price per Borough (2024–2025)](images/avgsalepriceperborough.png)](avgsalepriceperborough.pdf)
 
-[![Property Sale Density in NYC (2024–2025)](images/densitypropertysale.png)](densitypropertysale.pdf)
+[[Property Sale Density in NYC (2024–2025)](images/densitypropertysale.png)](densitypropertysale.pdf)
 
 ## Data Sources
 
