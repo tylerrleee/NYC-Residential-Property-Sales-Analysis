@@ -40,9 +40,9 @@ Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,0
 
 ## Features
 
-- **ETL pipeline in R** using `dplyr`, `sf`, `lubridate`, `stringr`  
-- **Automated geocoding**: centroids of 856,734 PLUTO polygons → lat/long  
-- **Reproducible plots** with `ggplot2` + `patchwork`   
+- **Pipeline in R** using `dplyr`, `sf`, `lubridate`, `stringr`  
+- **Geocoding**: centroids of 856,734 PLUTO polygons → lat/long  
+- **Plots** with `ggplot2` + `patchwork`   
 - **Report generation** in R Markdown  
 
 ---
