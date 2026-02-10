@@ -4,6 +4,7 @@
 A reproducible R pipeline for ingesting, cleaning, geocoding, and visualizing five-borough rolling-sales data from the NYC Department of Finance (May 2024–Apr 2025), with spatial analysis via the PLUTO shapefile.
 Processed & Cleaned Large-Scale Sales Data: Ingested and standardized over 120,000 rolling‑sales records spanning May 2024–April 2025 across all five NYC boroughs, recoding 30+ variables and handling 25,000+ zero‑price deed transfers to ensure a clean, analysis‑ready dataset.
 
+This project demonstrates tabular-to-spatial data integration using NYC's municipal identifier system (BBL), with explicit handling of data quality issues common in infrastructure asset datasets.
 
 ## Project Overview
 
